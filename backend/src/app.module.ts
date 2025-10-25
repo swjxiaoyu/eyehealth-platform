@@ -11,6 +11,10 @@ import { OrderModule } from './modules/order/order.module';
 import { RecommendationModule } from './modules/recommendation/recommendation.module';
 import { BlockchainModule } from './modules/blockchain/blockchain.module';
 import { StorageModule } from './modules/storage/storage.module';
+import { EncryptionModule } from './modules/encryption/encryption.module';
+import { EyeHealthModule } from './modules/eye-health/eye-health.module';
+import { GamificationModule } from './modules/gamification/gamification.module';
+import { NotificationModule } from './modules/notification/notification.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -43,6 +47,10 @@ import { AppService } from './app.service';
     RecommendationModule,
     BlockchainModule,
     StorageModule,
+    EncryptionModule,
+    EyeHealthModule,
+    GamificationModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

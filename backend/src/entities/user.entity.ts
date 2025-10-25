@@ -5,11 +5,17 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  OneToOne,
   Index,
 } from 'typeorm';
 import { Report } from './report.entity';
 import { Order } from './order.entity';
 import { Recommendation } from './recommendation.entity';
+import { EncryptionKey } from './encryption-key.entity';
+import { EyeHealthProfile } from './eye-health-profile.entity';
+import { EyeHealthRecord } from './eye-health-record.entity';
+import { Achievement, UserPoints, PointTransaction, DailyChallenge } from './gamification.entity';
+import { Notification } from './notification.entity';
 
 @Entity('users')
 export class User {
@@ -20,11 +26,11 @@ export class User {
   @Index()
   did: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: true })
   @Index()
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column({ nullable: true })
@@ -69,4 +75,28 @@ export class User {
 
   @OneToMany(() => Recommendation, (recommendation) => recommendation.user)
   recommendations: Recommendation[];
+
+  @OneToMany(() => EncryptionKey, (encryptionKey) => encryptionKey.user)
+  encryptionKeys: EncryptionKey[];
+
+  @OneToOne(() => EyeHealthProfile, (profile) => profile.user)
+  eyeHealthProfile: EyeHealthProfile;
+
+  @OneToMany(() => EyeHealthRecord, (record) => record.user)
+  eyeHealthRecords: EyeHealthRecord[];
+
+  @OneToMany(() => Achievement, (achievement) => achievement.user)
+  achievements: Achievement[];
+
+  @OneToOne(() => UserPoints, (points) => points.user)
+  userPoints: UserPoints;
+
+  @OneToMany(() => PointTransaction, (transaction) => transaction.user)
+  pointTransactions: PointTransaction[];
+
+  @OneToMany(() => DailyChallenge, (challenge) => challenge.user)
+  dailyChallenges: DailyChallenge[];
+
+  @OneToMany(() => Notification, (notification) => notification.user)
+  notifications: Notification[];
 }
